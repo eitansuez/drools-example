@@ -1,6 +1,7 @@
 package com.example.droolsexample;
 
 import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.StatelessKieSession;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -20,7 +21,7 @@ public class Runner implements CommandLineRunner {
   @Override
   public void run(String... args) {
 
-    StatelessKieSession kSession = kieContainer.newStatelessKieSession();
+    KieSession kieSession = kieContainer.newKieSession();
 
     Applicant youngApplicant = new Applicant( "John Smith Jr", 16 );
     Applicant adultApplicant = new Applicant("Mr John Smith", 30);
@@ -29,7 +30,9 @@ public class Runner implements CommandLineRunner {
 
     System.out.println( "before: " + applicants );
 
-    kSession.execute(applicants);
+    kieSession.insert(youngApplicant);
+    kieSession.insert(adultApplicant);
+    kieSession.fireAllRules();
 
     System.out.println( "after: " + applicants );
   }
