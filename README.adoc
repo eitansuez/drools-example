@@ -2,7 +2,10 @@
 
 This project is a basic "hello world" type example of using the drools rules engine in a boot application.
 
-./mvnw spring-boot:run
+[source,bash]
+----
+$ ./mvnw spring-boot:run
+----
 
 Basically a simple application that loads rules files (.drl) from the classpath, and runs a simple evaluation of a rule against a couple of objects of type Applicant.  The rule sets the 'valid' property to true if the age is less than 18.
 
